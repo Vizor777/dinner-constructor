@@ -2,18 +2,17 @@ package ru.practicum.dinner;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Random;
+
 
 public class Main {
 
     static DinnerConstructor dc;
     static Scanner scanner;
-    static Random random;
+
 
     public static void main(String[] args) {
         dc = new DinnerConstructor();
         scanner = new Scanner(System.in);
-        random = new Random();
 
         while (true) {
             printMenu();
@@ -27,7 +26,10 @@ public class Main {
                     generateDishCombo();
                     break;
                 case "3":
+                    System.out.println("Завершение работы программы.");
                     return;
+                default:
+                    System.out.println("Введена неверная команда. Повторите ввод.\n");
             }
         }
     }
@@ -51,9 +53,24 @@ public class Main {
 
     private static void generateDishCombo() {
         System.out.println("Начинаем конструировать обед...");
+        if (dc.dinnerList.isEmpty()) {
+            System.out.println("Список блюд пуст. Необходимо выполнить команду №1.\n");
+            return;
+        }
 
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
         int numberOfCombos = scanner.nextInt();
+
+        boolean checkNumberOfCombos = true;
+        while (checkNumberOfCombos) {
+            if (numberOfCombos < 1) {
+                System.out.println("Введено неверное количество наборов блюд. Повторите ввод. \n");
+                numberOfCombos = scanner.nextInt();
+            } else {
+                checkNumberOfCombos = false;
+            }
+        }
+
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
@@ -72,6 +89,6 @@ public class Main {
         }
 
         // сгенерируйте комбинации блюд и выведите на экран
-        dc.createKombo(komboListtype, random, numberOfCombos);
+        dc.createKombo(komboListtype, numberOfCombos);
     }
 }

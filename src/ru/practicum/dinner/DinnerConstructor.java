@@ -7,6 +7,7 @@ import java.util.Random;
 public class DinnerConstructor {
     HashMap<String, ArrayList<String>> dinnerList = new HashMap<>();
     HashMap<String, ArrayList<String>> randomList = new HashMap<>();
+    Random random = new Random();
 
     void addDishType(String dishType, String dishName) {
         if (checkType(dishType)) {
@@ -18,7 +19,7 @@ public class DinnerConstructor {
         }
     }
 
-    void createKombo(ArrayList<String> typeList, Random random, int numberOfCombos) {
+    void createKombo(ArrayList<String> typeList, int numberOfCombos) {
         for (int i = 0; i < numberOfCombos; i++) {
             System.out.println("Комбо " + (i + 1));
             ArrayList<String> k1 = new ArrayList<>();
